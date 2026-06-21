@@ -41,7 +41,7 @@ Usar `WebSearch` con queries tipo: "Airbnb [zona] [fechas] 5 personas alquiler"
 ### Paso 4: Email via Gmail
 - Herramienta: `mcp__Gmail__create_draft` (el conector solo crea borradores — revisar y enviar manualmente)
 - Destinatario: danielglagoa@gmail.com
-- Asunto: `Booking + Airbnb Valencia/Gandía [YYYY/MM/DD] — X oportunidades`
+- Asunto: `Booking + Airbnb Valencia/Gandía [DD/MM/YYYY] — X oportunidades` (formato dd/MM/yyyy FIJO — un Apps Script de Gmail auto-envía el borrador buscando por este prefijo exacto; no cambiar el formato)
 - Si X=0 en total: `0 oportunidades dentro de presupuesto — alternativas más cercanas`
 - Incluir siempre LUGAR y FECHAS en cada alojamiento listado
 
@@ -61,3 +61,4 @@ Timezone:   Europe/Madrid
 - La API de Booking usa precio **por noche**; el presupuesto del usuario es **por estancia total** (2 noches). Filtrar siempre el resultado final por ≤650€ total.
 - Las zonas La Malvarrosa y El Cabanyal están muy próximas (≈1km). Con radio 2km las búsquedas por coordenadas se solapan — es esperado y correcto.
 - Guardar todos los resultados encontrados en el log, no solo los que cumplen el presupuesto.
+- **Auto-envío del email**: un Google Apps Script (trigger horario) busca el borrador del día por el prefijo del asunto en formato dd/MM/yyyy y lo envía. Por eso el formato de fecha del asunto NO debe cambiar.
