@@ -1,0 +1,80 @@
+{
+  "date": "2026-06-21",
+  "run_time_local": "09:00 Europe/Madrid",
+  "timestamp_utc": "2026-06-21T07:00:00Z",
+  "booking": {
+    "searches_attempted": 9,
+    "initial_errors": {
+      "not_found": 6,
+      "destination_not_found": 3
+    },
+    "retries_with_coordinates": 9,
+    "results_after_retry": {
+      "Platja_de_Gandia_10_12": 7,
+      "Platja_de_Gandia_17_19": 10,
+      "Platja_de_Gandia_24_26": 9,
+      "La_Malvarrosa_10_12": 10,
+      "La_Malvarrosa_17_19": 10,
+      "La_Malvarrosa_24_26": 10,
+      "El_Cabanyal_10_12": 10,
+      "El_Cabanyal_17_19": 10,
+      "El_Cabanyal_24_26": 10
+    },
+    "results_within_budget_650eur": 3,
+    "within_budget_detail": [
+      {
+        "name": "Casa Familiar del Grau",
+        "zone": "Platja de Gandia / Grao de Gandía",
+        "checkin": "2026-07-17",
+        "checkout": "2026-07-19",
+        "price_total_eur": 618.12,
+        "url": "https://www.booking.com/hotel/es/casa-familiar-del-grau.html?aid=8132308&checkin=2026-07-17&checkout=2026-07-19&no_rooms=1&group_adults=5&selected_currency=EUR"
+      },
+      {
+        "name": "Urban Youth Hostel",
+        "zone": "La Malvarrosa / El Cabanyal, Valencia",
+        "checkin": "2026-07-10",
+        "checkout": "2026-07-12",
+        "price_total_eur": 364.82,
+        "note": "Hostel solo adultos - verificar habitación privada",
+        "url": "https://www.booking.com/hotel/es/urban-youth-hostel.html?aid=8132308&checkin=2026-07-10&checkout=2026-07-12&no_rooms=1&group_adults=5&selected_currency=EUR"
+      },
+      {
+        "name": "Urban Youth Hostel",
+        "zone": "La Malvarrosa / El Cabanyal, Valencia",
+        "checkin": "2026-07-24",
+        "checkout": "2026-07-26",
+        "price_total_eur": 364.82,
+        "note": "Hostel solo adultos - verificar habitación privada",
+        "url": "https://www.booking.com/hotel/es/urban-youth-hostel.html?aid=8132308&checkin=2026-07-24&checkout=2026-07-26&no_rooms=1&group_adults=5&selected_currency=EUR"
+      }
+    ],
+    "cheapest_over_budget": {
+      "name": "Hostal Ducal",
+      "zone": "Platja de Gandia / Grao de Gandía",
+      "checkin": "2026-07-17",
+      "checkout": "2026-07-19",
+      "price_total_eur": 690.0,
+      "url": "https://www.booking.com/hotel/es/hostal-ducal.html?aid=8132308&checkin=2026-07-17&checkout=2026-07-19&no_rooms=1&group_adults=5&selected_currency=EUR"
+    }
+  },
+  "airbnb": {
+    "searches_attempted": 9,
+    "method": "WebSearch",
+    "results_with_confirmed_price": 0,
+    "results_unconfirmed_found": 5,
+    "unconfirmed_listings": [
+      {"name": "Playa Malvarrosa -5 personas-wifi-mascotas", "zone": "La Malvarrosa", "url": "https://www.airbnb.es/rooms/1518852824887366137"},
+      {"name": "Sol & Playa 5 personas en La Malvarrosa", "zone": "La Malvarrosa", "url": "https://www.airbnb.es/rooms/1528216326397301001"},
+      {"name": "Malvarrosa Beach 5", "zone": "La Malvarrosa", "url": "https://www.airbnb.com/rooms/1008360725939823106"},
+      {"name": "Escape to Cabanyal: apartment mins from the beach", "zone": "El Cabanyal", "url": "https://www.airbnb.com/rooms/1130957273569306803"},
+      {"name": "Platja de Gandia stays (category)", "zone": "Platja de Gandia", "url": "https://www.airbnb.com/platja-de-gandia-spain/stays"}
+    ]
+  },
+  "summary": {
+    "total_opportunities_within_budget": 3,
+    "email_draft_id": "r-6774345740242364098",
+    "email_draft_created": true,
+    "email_subject": "Booking + Airbnb Valencia/Gandía 21/06/2026 — 3 oportunidades"
+  }
+}
