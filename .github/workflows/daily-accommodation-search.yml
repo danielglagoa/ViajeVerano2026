@@ -1,0 +1,62 @@
+name: Búsqueda diaria alojamiento Valencia/Gandía
+
+on:
+  schedule:
+    # 09:00 hora Madrid (CEST = UTC+2, verano) → 07:00 UTC
+    # En invierno (CET = UTC+1) cambiar a '0 8 * * *' para mantener las 09:00 Madrid
+    - cron: '0 7 * * *'
+  workflow_dispatch:   # permite lanzar manualmente desde la UI de GitHub
+
+permissions:
+  contents: write      # para hacer commit del log diario
+
+jobs:
+  daily-search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      # ── 1. Código ────────────────────────────────────────────────────────────
+      - name: Checkout repositorio
+        uses: actions/checkout@v4
+
+      # ── 2. Claude ejecuta la búsqueda completa ───────────────────────────────
+      - name: Ejecutar rutina de búsqueda con Claude
+        uses: anthropics/claude-code-action@beta
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # MCP_CONFIG: JSON con la configuración de los servidores MCP.
+          # Ver .claude/routines/mcp-config-template.json para la plantilla.
+          mcp_config: ${{ secrets.MCP_CONFIG }}
+          direct_prompt: |
+            Hoy es $(date -u +%Y-%m-%d). Estás en GitHub Actions (CI=true).
+            Lee el archivo .claude/routines/daily-search.md y ejecuta la rutina
+            COMPLETA paso a paso. Al finalizar:
+            - Guarda el asunto del email en logs/email-subject.txt (una línea)
+            - Guarda el cuerpo del email en logs/email-body.txt (texto plano)
+            - Añade una línea al fichero logs/search-log.jsonl con el resumen del día
+
+      # ── 3. Enviar email via Gmail SMTP ───────────────────────────────────────
+      - name: Enviar email de resultados
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+        run: |
+          if [ ! -f logs/email-body.txt ]; then
+            echo "⚠️  No se generó email-body.txt, abortando envío."
+            exit 0
+          fi
+          python3 scripts/send-email.py
+
+      # ── 4. Guardar log en el repositorio ─────────────────────────────────────
+      - name: Commit del log diario
+        run: |
+          git config user.name  "Routine Bot"
+          git config user.email "noreply@anthropic.com"
+          # Limpiar archivos temporales de email antes del commit
+          rm -f logs/email-body.txt logs/email-subject.txt
+          git add logs/search-log.jsonl
+          git diff --staged --quiet \
+            && echo "Sin cambios en el log." \
+            || git commit -m "chore: log búsqueda $(date -u +%Y-%m-%d)"
+          git push origin HEAD

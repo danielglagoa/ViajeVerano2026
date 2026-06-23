@@ -1,0 +1,23 @@
+{
+  "_comentario": "Copia este JSON como valor del secret MCP_CONFIG en GitHub → Settings → Secrets → Actions.",
+  "_instrucciones": [
+    "1. Obtén las credenciales del MCP de Booking.com desde su portal de partners.",
+    "2. Genera un token OAuth de Gmail (scope: gmail.compose) y guárdalo en GMAIL_OAUTH_TOKEN.",
+    "   Alternativamente, usa GMAIL_USER + GMAIL_APP_PASSWORD para SMTP (más sencillo).",
+    "3. Elimina las claves que empiecen por '_' antes de pegar el JSON como secret."
+  ],
+  "mcpServers": {
+    "Booking-com": {
+      "command": "npx",
+      "args": ["-y", "@booking.com/mcp-server"],
+      "env": {}
+    },
+    "Gmail": {
+      "command": "npx",
+      "args": ["-y", "@gptlabs/mcp-gmail"],
+      "env": {
+        "GMAIL_OAUTH_TOKEN": "<TU_TOKEN_OAUTH_GMAIL>"
+      }
+    }
+  }
+}
